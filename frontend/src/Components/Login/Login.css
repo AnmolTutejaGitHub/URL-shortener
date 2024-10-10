@@ -1,0 +1,44 @@
+.login-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background-color: white;
+    width: min(400px, 40%);
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-label {
+    display: inline-block;
+    min-width: 90px;
+}
+
+.login-input {
+    padding: 0.5rem;
+    border: none;
+    outline: none;
+}
+
+.login-btn {
+    padding: 0.5rem 0.7rem;
+    color: white;
+    border: none;
+    background-color: #2381C2;
+    width: 60%;
+    cursor: pointer;
+}
+
+.login-heading {
+    font-size: 40px;
+    font-weight: bolder;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}

@@ -7,7 +7,9 @@ const auth = async function (req, res, next) {
     }
     try {
         const isValid = jwt.verify(token, secret_key);
-        if (isValid) req.user = jwt.decode(token, secret_key);
+        if (isValid) {
+            req.user = jwt.decode(token, secret_key);
+        }
         next();
     } catch (error) {
         return res.status(400).send("Token expired or invalid");

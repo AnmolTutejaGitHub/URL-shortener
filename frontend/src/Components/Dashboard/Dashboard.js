@@ -3,9 +3,13 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Shorten from "../Shorten/Shorten";
 import Stats from "../Stats/Stats";
 import Profile from "../Profile/Profile";
+import { useContext } from 'react';
+import UserContext from '../../Context/UserContext';
 
 
 function Dashboard() {
+    const { user, setUser } = useContext(UserContext);
+    console.log(user);
     return (
         <div>
             <Navigation />

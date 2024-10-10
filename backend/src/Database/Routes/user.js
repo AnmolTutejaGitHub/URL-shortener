@@ -16,7 +16,7 @@ router.get('/users', auth, async (req, res) => {
 });
 
 
-router.post('/login', auth, async (req, res) => {
+router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
 
@@ -40,18 +40,15 @@ router.post('/login', auth, async (req, res) => {
 router.post('/signup', async (req, res) => {
     try {
         const user = new User(req.body);
-        //console.log(req.body);
         await user.save();
 
         const token = jwt.sign(user.toObject(), secret_key, { expiresIn: '5d' });
-        //console.log(token);
 
         res.cookie('token', token, { httpOnly: true, maxAge: 5 * 24 * 60 * 60 * 1000 });
         res.status(200).send({ message: "Signup successful" });
     }
     catch (error) {
-        console.error(error);
-        res.status(400).send(error);
+        res.status(400).send({ error: error.message });
     }
 })
 
