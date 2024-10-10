@@ -1,0 +1,15 @@
+.profile-card {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    justify-content: center;
+}
+
+.label-css {
+    min-width: 100px;
+}
+
+.profile-input-css {
+    padding: 5px 10px;
+    width: min(300px, 80%)
+}

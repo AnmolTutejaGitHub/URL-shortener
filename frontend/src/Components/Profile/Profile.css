@@ -1,0 +1,36 @@
+.profile {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-div {
+    background-color: white;
+    color: black;
+    width: 80%;
+    padding: 2rem;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.profile-data {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-name {
+    border-radius: 50%;
+    width: 130px;
+}
+
+.profile-pic-div {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
