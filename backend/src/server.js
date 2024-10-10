@@ -1,8 +1,10 @@
 const express = require('express');
 const app = express();
 require('./Database/mongoose');
+const cookieParser = require('cookie-parser');
 
 const PORT = process.env.PORT || 6969;
+app.use(cookieParser());
 
 // Routes 
 const userRouter = require('./Database/Routes/user');
