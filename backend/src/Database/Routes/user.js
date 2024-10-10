@@ -3,14 +3,15 @@ const router = new express.Router();
 const User = require('../Models/User');
 const jwt = require('jsonwebtoken');
 const auth = require('../MiddleWare/auth');
+const bcrypt = require('bcrypt');
 
 const secret_key = 'tobechanged';
 
-router.get('/users', async (req, res) => {
+router.get('/users', auth, async (req, res) => {
     try {
         res.status(200).send(req.user);
     } catch (error) {
-        res.status(500).send({ error: "Something went wrong" });
+        res.status(400).send(error);
     }
 });
 
@@ -25,27 +26,32 @@ router.post('/login', auth, async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).send("Invalid login credentials");
 
-        const token = jwt.sign({ id: user._id, email: user.email }, secret_key, { expiresIn: '5d' });
-        res.cookie('token', token, { httpOnly: true });
+        const token = jwt.sign(user.toObject(), secret_key, { expiresIn: '5d' });
+        console.log(token);
+        res.cookie('token', token, { httpOnly: true, maxAge: 5 * 24 * 60 * 60 * 1000 });
 
         res.status(200).send(user);
 
     } catch (error) {
-        res.status(500).send({ error: "Internal Server Error" });
+        res.status(400).send(error);
     }
 })
 
 router.post('/signup', async (req, res) => {
     try {
         const user = new User(req.body);
+        //console.log(req.body);
         await user.save();
 
-        const token = jwt.sign(user, secret_key, { expiresIn: '5d' });
-        res.cookie('token', token, { httpOnly: true, expiresIn: '5d' });
+        const token = jwt.sign(user.toObject(), secret_key, { expiresIn: '5d' });
+        //console.log(token);
 
+        res.cookie('token', token, { httpOnly: true, maxAge: 5 * 24 * 60 * 60 * 1000 });
         res.status(200).send({ message: "Signup successful" });
-    } catch (error) {
-        res.status(500).send({ error: "Failed to create user" });
+    }
+    catch (error) {
+        console.error(error);
+        res.status(400).send(error);
     }
 })
 

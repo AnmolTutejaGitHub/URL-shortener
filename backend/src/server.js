@@ -4,6 +4,7 @@ require('./Database/mongoose');
 const cookieParser = require('cookie-parser');
 
 const PORT = process.env.PORT || 6969;
+app.use(express.json());
 app.use(cookieParser());
 
 // Routes 

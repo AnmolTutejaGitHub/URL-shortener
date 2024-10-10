@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-
+const secret_key = 'tobechanged';
 const auth = async function (req, res, next) {
     const token = req.cookies.token;
     if (!token) {
