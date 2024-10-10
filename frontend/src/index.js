@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './Components/App/App';
+import { Provider } from './Context/UserContext';
 
-const ele = document.querySelector('.root');
+const ele = document.querySelector('#root');
 const root = ReactDOM.createRoot(ele);
 root.render(
-    <App />
+    <Provider>
+        <App />
+    </Provider>
 );
