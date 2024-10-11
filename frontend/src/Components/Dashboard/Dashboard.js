@@ -9,7 +9,6 @@ import UserContext from '../../Context/UserContext';
 
 function Dashboard() {
     const { user, setUser } = useContext(UserContext);
-    console.log(user);
     return (
         <div>
             <Navigation />

@@ -29,7 +29,13 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
-    }
+    },
+    urls: [{
+        name: String,
+        originalurl: String,
+        shortened: String,
+        Dummyid: String
+    }]
 })
 
 userSchema.pre('save', async function (next) {

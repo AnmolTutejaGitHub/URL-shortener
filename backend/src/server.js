@@ -16,7 +16,9 @@ app.use(cookieParser());
 
 // Routes 
 const userRouter = require('./Database/Routes/user');
+const urlRouter = require('./Database/Routes/url');
 app.use(userRouter);
+app.use(urlRouter);
 
 
 app.listen(PORT, () => {

@@ -65,4 +65,24 @@ router.post('/signup', async (req, res) => {
     }
 })
 
+router.patch('/users/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await User.findById(id);
+
+        const urlObj = {
+            originalurl: req.body.originalurl,
+            name: req.body.name,
+            shortened: req.body.shortened,
+            Dummyid: req.body.Dummyid
+        }
+
+        user.urls.push(urlObj);
+        await user.save();
+        res.status(200).send(user);
+    } catch (e) {
+        res.status(400).send(e);
+    }
+})
+
 module.exports = router;
