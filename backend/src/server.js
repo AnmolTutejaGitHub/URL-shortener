@@ -3,12 +3,16 @@ const app = express();
 require('./Database/mongoose');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true, // allowed cookies
+};
+
 
 const PORT = process.env.PORT || 6969;
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
-
-app.use(cors());
 
 // Routes 
 const userRouter = require('./Database/Routes/user');

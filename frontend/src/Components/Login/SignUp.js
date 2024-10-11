@@ -24,7 +24,7 @@ function SignUp() {
         }
 
         try {
-            const response = await axios.post('http://localhost:6969/signup', user);
+            const response = await axios.post('http://localhost:6969/signup', user, { withCredentials: true });
             if (response.status === 200) {
                 navigate('/login');
             }

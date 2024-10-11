@@ -4,6 +4,7 @@ import UserContext from '../../Context/UserContext';
 import ProfileCard from './ProfileCard';
 
 function Profile() {
+
     const { user, setUser } = useContext(UserContext);
     if (!user) {
         return <div>Please log in to view your profile.</div>;

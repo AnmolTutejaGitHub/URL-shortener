@@ -17,7 +17,7 @@ function Login() {
         const User = await axios.post('http://localhost:6969/login', {
             email,
             password
-        });
+        }, { withCredentials: true });
         //console.log(User.data);
         setUser(User.data);
         navigate('/dashboard');

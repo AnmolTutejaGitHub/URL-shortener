@@ -28,7 +28,13 @@ router.post('/login', async (req, res) => {
 
         const token = jwt.sign(user.toObject(), secret_key, { expiresIn: '5d' });
         console.log(token);
-        res.cookie('token', token, { httpOnly: true, maxAge: 5 * 24 * 60 * 60 * 1000 });
+        res.cookie('token', token, {
+            httpOnly: true,
+            maxAge: 5 * 24 * 60 * 60 * 1000,
+            path: '/',
+            sameSite: 'Lax',
+            secure: false
+        });
 
         res.status(200).send(user);
 
@@ -44,7 +50,14 @@ router.post('/signup', async (req, res) => {
 
         const token = jwt.sign(user.toObject(), secret_key, { expiresIn: '5d' });
 
-        res.cookie('token', token, { httpOnly: true, maxAge: 5 * 24 * 60 * 60 * 1000 });
+        res.cookie('token', token, {
+            httpOnly: true,
+            maxAge: 5 * 24 * 60 * 60 * 1000,
+            path: '/',
+            sameSite: 'Lax',
+            secure: false,
+        });
+
         res.status(200).send({ message: "Signup successful" });
     }
     catch (error) {
