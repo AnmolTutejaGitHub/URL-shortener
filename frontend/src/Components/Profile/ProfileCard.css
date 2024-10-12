@@ -10,6 +10,13 @@
 }
 
 .profile-input-css {
-    padding: 5px 10px;
-    width: min(300px, 80%)
+    padding: 7px 10px;
+    width: min(300px, 80%);
+    color: white;
+    background: rgb(46, 55, 75);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    outline: none;
+    border: none;
+    font-size: 0.9rem;
 }

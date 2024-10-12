@@ -28,11 +28,44 @@
 }
 
 .url-shortener-btn {
-    background-color: #2381C2;
+    background-color: #144EE3;
     border: none;
     color: white;
     padding: 1rem;
     width: 140px;
     font-size: 1rem;
     cursor: pointer;
+}
+
+
+.shorten-title {
+    font-size: 3rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #4a00e0, #ff0080, #ff8c00);
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 30px;
+}
+
+.shortener-bottom {
+    color: gray;
+    padding: 1rem 5rem;
+    font-size: 16px;
+}
+
+.shorten-output {
+    background: rgb(46, 55, 75);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    color: white;
+    padding: 1.3rem;
+    width: 50%;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.clipboard-copy {
+    cursor: pointer;
+    position: absolute;
+    right: 1rem;
 }

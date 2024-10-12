@@ -16,7 +16,7 @@ function Navigation() {
             <Link className='link' to="shorten">Shorten</Link>
             <Link className='link' to="stats">Stats</Link>
             <Link className='link' to="profile">Profile</Link>
-            <button onClick={logout}>log out</button>
+            <div onClick={logout} className='logged-out'>log out</div>
         </nav>
     );
 }

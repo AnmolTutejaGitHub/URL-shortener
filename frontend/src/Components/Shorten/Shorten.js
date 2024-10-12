@@ -1,16 +1,17 @@
 import { useState } from 'react';
 import './Shorten.css';
-import ShortenOutput from './ShortenOutput';
 import axios from 'axios';
 import { useContext } from 'react';
 import UserContext from '../../Context/UserContext';
+import { IoCopy } from "react-icons/io5";
+import { FaCheck } from "react-icons/fa";
 
 function Shorten() {
     const { user, setUser } = useContext(UserContext);
     const [shortURL, setShortURL] = useState('');
-    const [URLArr, setURLArr] = useState([]);
     const [enteredURL, setEnteredURL] = useState('');
     const [URLname, setURLname] = useState('');
+    const [copied, setCopied] = useState(false);
 
     async function shortenLogic(url) {
 
@@ -39,7 +40,6 @@ function Shorten() {
 
     async function handleAddingToUserDB(shortened, url, Dummyid) {
         setShortURL(shortened);
-        setURLArr([...URLArr, shortened]);
 
         const response = await axios.patch(`http://localhost:6969/users/${user._id}`, {
             shortened,
@@ -49,11 +49,6 @@ function Shorten() {
         });
         if (response.status === 200) setUser(response.data);
     }
-
-
-    const renderURLs = URLArr.map((url, index) => (
-        <ShortenOutput key={index} url={url} />
-    ));
 
     function generateStr(length) {
         const alphabets = 'abcdefghijklmnopqrstuvwxyz';
@@ -69,8 +64,17 @@ function Shorten() {
         setEnteredURL(e.target.value);
     }
 
+    function copyToClipboard() {
+        navigator.clipboard.writeText(shortURL).then(() => {
+            setCopied(true);
+            setTimeout(() => setCopied(false), 1000);
+        });
+
+    }
+
     return (
         <div className='url-shortener'>
+            <div className='shorten-title'>Shotern Your Loong Link</div>
             <div className="url-shortener-div">
                 <input placeholder="Enter name of website" className="url-shortener-input" onChange={(e) => setURLname(e.target.value)}></input>
                 <input placeholder="Enter url to shorten" className="url-shortener-input" onChange={handleChange}></input>
@@ -78,7 +82,12 @@ function Shorten() {
                     <button className="url-shortener-btn" onClick={() => { shortenLogic(enteredURL) }}>Shorten URL</button>
                 </div>
             </div>
-            <div>{renderURLs}</div>
+            <div className='shortener-bottom'>Long links can often be cumbersome to share, especially on social media platforms or in text messages where space is limited. By using Shorten you can transform lengthy links into concise, easy-to-share versions.</div>
+            {shortURL.trim() !== '' &&
+                <div className='shorten-output'>{shortURL}
+                    {copied ? <FaCheck color="green" className='clipboard-copy' /> : <IoCopy className='clipboard-copy' onClick={copyToClipboard} />}
+                </div>
+            }
         </div>
     );
 }

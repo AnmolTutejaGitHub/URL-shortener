@@ -2,9 +2,9 @@ import './ProfileCard.css';
 
 function ProfileCard({ htmlfor, val }) {
     const profileMap = {
-        "name": "username",
-        "email": "email",
-        "password": "password"
+        "name": "Username",
+        "email": "Email",
+        "gender": "Gender"
     }
     return (
         <div className='profile-card'>

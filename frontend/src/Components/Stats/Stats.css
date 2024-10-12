@@ -1,0 +1,40 @@
+.stats-table {
+    width: 100%;
+    border-spacing: 0 0;
+    color: white;
+    border-radius: 10px;
+    overflow: hidden;
+
+}
+
+.stats-table th {
+    font-size: 1.5rem;
+    padding: 2rem;
+}
+
+.stats-table td {
+    font-size: 1rem;
+    padding: 1rem;
+    background-color: inherit;
+    text-align: left;
+}
+
+.stats-table thead {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.stats-table tbody {
+    background: rgb(46, 55, 75);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.stats-div {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0 1rem;
+    border-radius: 10px;
+
+}

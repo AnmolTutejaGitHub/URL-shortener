@@ -1,7 +1,13 @@
 .header {
-    color: white;
     text-align: center;
-    font-size: 2rem;
+}
+
+.header h1 {
+    font-size: 4rem;
     font-family: 'Open Sans', sans-serif;
     font-weight: bolder;
+    background-image: linear-gradient(90deg, #4a00e0, #ff0080, #ff8c00);
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
 }
