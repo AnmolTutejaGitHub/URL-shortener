@@ -20,13 +20,17 @@ router.post('/url', async (req, res) => {
 
 
 router.post('/addurl', async (req, res) => {
-
     try {
         const url = new URLs(req.body);
         await url.save();
+        res.send(url);
     } catch (error) {
-        console.error(error);
-        res.status(400).send(error);
+        if (error.name === 'ValidationError') {
+            return res.status(400).send({
+                error: error.errors.originalurl.message
+            });
+        }
+        res.send(error);
     }
 });
 

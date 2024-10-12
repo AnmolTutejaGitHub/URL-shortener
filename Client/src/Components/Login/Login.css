@@ -4,10 +4,15 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    background-color: white;
+    background: rgb(46, 55, 75);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    color: white;
     width: min(400px, 40%);
     padding: 2rem;
     border-radius: 10px;
+    border: 1px solid rgb(73, 84, 107);
+    font-size: 1rem;
 }
 
 .login {
@@ -25,20 +30,38 @@
     padding: 0.5rem;
     border: none;
     outline: none;
+    width: 93%;
+    background-color: rgb(67, 77, 99);
+    color: white;
 }
 
 .login-btn {
     padding: 0.5rem 0.7rem;
     color: white;
     border: none;
-    background-color: #2381C2;
+    background-color: #144EE3;
     width: 60%;
     cursor: pointer;
 }
 
 .login-heading {
-    font-size: 40px;
+    font-size: 35px;
     font-weight: bolder;
     padding-top: 10px;
     padding-bottom: 20px;
+}
+
+.login-field {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+}
+
+.login-link {
+    color: white;
+}
+
+.error {
+    color: rgb(233, 64, 64);
 }

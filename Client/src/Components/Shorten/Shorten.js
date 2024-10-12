@@ -6,40 +6,53 @@ import UserContext from '../../Context/UserContext';
 import { IoCopy } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa";
 
+
 function Shorten() {
     const { user, setUser } = useContext(UserContext);
     const [shortURL, setShortURL] = useState('');
     const [enteredURL, setEnteredURL] = useState('');
     const [URLname, setURLname] = useState('');
     const [copied, setCopied] = useState(false);
+    const [error, setError] = useState('');
 
     async function shortenLogic(url) {
+        setError('');
+        try {
 
-        // finding if already shortened one
-        const res = await axios.post(`http://localhost:6969/url`, {
-            originalurl: url
-        });
-        if (res.status === 200 && res.data.shortened != null) {
-            // as can also be shortened by someother user
-            handleAddingToUserDB(res.data.shortened, url, res.data.dummyid);
-            return res.data.shortened;
+            if (URLname.trim() === '') throw Error('Please Provide website name');
+            if (url.trim() === '') throw Error('Please Provide website URL');
+            // finding if already shortened one
+            const res = await axios.post(`http://localhost:6969/url`, {
+                originalurl: url
+            });
+            if (res.status === 200 && res.data.shortened != null) {
+                // as can also be shortened by someother user
+
+                await handleAddingToUserDB(res.data.shortened, url, res.data.dummyid);
+                return setShortURL(res.data.shortened);
+            }
+
+
+            const threelen = generateStr(3);
+            const shortened = `http://localhost:6969/r/${threelen}`;
+            await axios.post('http://localhost:6969/addurl', {
+                shortened,
+                originalurl: url,
+                name: URLname,
+                Dummyid: threelen
+            })
+
+            setShortURL(shortened);
+            await handleAddingToUserDB(shortened, url, threelen);
+            return shortened;
+
+        } catch (err) {
+            const error = err.response?.data?.error || err.message || 'some error occured';
+            setError(error);
         }
-
-
-        const threelen = generateStr(3);
-        const shortened = `http://localhost:6969/r/${threelen}`;
-        handleAddingToUserDB(shortened, url, threelen);
-        await axios.post('http://localhost:6969/addurl', {
-            shortened,
-            originalurl: url,
-            name: URLname,
-            Dummyid: threelen
-        })
-        return shortened;
     }
 
     async function handleAddingToUserDB(shortened, url, Dummyid) {
-        setShortURL(shortened);
 
         const response = await axios.patch(`http://localhost:6969/users/${user._id}`, {
             shortened,
@@ -79,15 +92,16 @@ function Shorten() {
                 <input placeholder="Enter name of website" className="url-shortener-input" onChange={(e) => setURLname(e.target.value)}></input>
                 <input placeholder="Enter url to shorten" className="url-shortener-input" onChange={handleChange}></input>
                 <div>
-                    <button className="url-shortener-btn" onClick={() => { shortenLogic(enteredURL) }}>Shorten URL</button>
+                    <button className="url-shortener-btn" onClick={() => { shortenLogic(enteredURL) }} >Shorten URL</button>
                 </div>
             </div>
             <div className='shortener-bottom'>Long links can often be cumbersome to share, especially on social media platforms or in text messages where space is limited. By using Shorten you can transform lengthy links into concise, easy-to-share versions.</div>
-            {shortURL.trim() !== '' &&
+            {!error && shortURL.trim() !== '' &&
                 <div className='shorten-output'>{shortURL}
                     {copied ? <FaCheck color="green" className='clipboard-copy' /> : <IoCopy className='clipboard-copy' onClick={copyToClipboard} />}
                 </div>
             }
+            {error && <p className='error'>*{error}</p>}
         </div>
     );
 }

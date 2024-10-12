@@ -21,10 +21,10 @@ router.post('/login', async (req, res) => {
         const { email, password } = req.body;
 
         const user = await User.findOne({ email });
-        if (!user) return res.status(400).send("Invalid login credentials");
+        if (!user) return res.status(400).send({ error: "Invalid login credentials" });
 
         const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) return res.status(400).send("Invalid login credentials");
+        if (!isMatch) return res.status(400).send({ error: "Invalid login credentials" });
 
         const token = jwt.sign({ _id: user._id }, secret_key, { expiresIn: '5d' });
 
@@ -90,6 +90,26 @@ router.patch('/users/:id', async (req, res) => {
 router.get('/logout', (req, res) => {
     res.cookie('token', '', { expires: new Date(0), httpOnly: true });
     res.status(200).send('Logged out and token destroyed');
+});
+
+
+router.post('/delUserUrl', async (req, res) => {
+    const { email, originalurl } = req.body;
+
+    try {
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(400).send({ error: 'User not found' });
+        }
+
+        user.urls = user.urls.filter(url => url.originalurl !== originalurl);
+        await user.save();
+
+        res.status(200).send(user);
+    } catch (error) {
+        res.status(400).send(error);
+    }
 });
 
 module.exports = router;

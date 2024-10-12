@@ -40,31 +40,31 @@ function SignUp() {
     return (
         <div className='login'>
             <div className='login-div'>
-                <div className='login-heading'>Sign Up</div>
+                <div className='login-heading'>Sign Up & Get Started</div>
 
-                <div>
+                <div className='login-field'>
                     <label htmlFor="name" className='login-label'>Name</label>
                     <input name="name" placeholder="Enter Your Name" required onChange={(e) => { setName(e.target.value) }} className='login-input'></input>
                 </div>
 
-                <div>
+                <div className='login-field'>
                     <label htmlFor="email" className='login-label'>Email</label>
                     <input name="email" placeholder="Enter Your Email" required onChange={(e) => { setEmail(e.target.value) }} className='login-input'></input>
                 </div>
 
-                <div>
+                <div className='login-field'>
                     <label htmlFor="password" className='login-label' >Password</label>
                     <input name="password" placeholder="Enter Your password" required onChange={(e) => { setPassword(e.target.value) }} className='login-input'></input>
                 </div>
 
-                <div>
+                <div className='login-field'>
                     <label htmlFor="gender" className='login-label'>Gender</label>
                     <input name="gender" placeholder="Enter Your Gender" required onChange={(e) => { setGender(e.target.value) }} className='login-input'></input>
                 </div>
 
-                <p>Already have an account ? <Link to="/login">login here</Link></p>
+                <p>Already have an account ? <Link to="/login" className='login-link'>login here</Link></p>
                 <button className='login-btn' onClick={handleSignup}>Sign up</button>
-                <p>{error}</p>
+                {error && <p className="error">*{error}</p>}
 
             </div>
         </div>
