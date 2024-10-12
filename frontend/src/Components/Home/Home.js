@@ -4,13 +4,31 @@ import { Route, Routes } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import './Home.css';
+import axios from 'axios';
+import { useContext } from 'react';
+import UserContext from '../../Context/UserContext';
 
 function Home() {
     const navigate = useNavigate();
+    const { user, setUser } = useContext(UserContext);
 
     useEffect(() => {
-        navigate('login');
-    }, [])
+        async function DoesTokenExist() {
+            try {
+                const response = await axios.get('http://localhost:6969/users', { withCredentials: true });
+                if (response.status === 200) {
+                    setUser(response.data);
+                    navigate('/dashboard');
+                } else {
+                    navigate('/login');
+                }
+            } catch (e) {
+                console.error('token expired or you logged out thus deleting the token');
+                navigate('/login');
+            }
+        }
+        DoesTokenExist();
+    }, []);
 
     return (
         <div>

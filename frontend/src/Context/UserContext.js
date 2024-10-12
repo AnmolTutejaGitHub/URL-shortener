@@ -18,7 +18,7 @@ function Provider({ children }) {
                     setUser(response.data);
                 }
             } catch (error) {
-                console.error('Error fetching user:', error);
+                console.error('token expired or you logged out thus deleting the token');
                 setUser(null);
             }
         };

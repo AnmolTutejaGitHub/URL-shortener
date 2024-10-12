@@ -18,9 +18,9 @@ function Login() {
             email,
             password
         }, { withCredentials: true });
-        //console.log(User.data);
+
         setUser(User.data);
-        navigate('/dashboard');
+        navigate('/dashboard/shorten');
     }
 
     return (

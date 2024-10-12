@@ -26,7 +26,8 @@ router.post('/login', async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).send("Invalid login credentials");
 
-        const token = jwt.sign(user.toObject(), secret_key, { expiresIn: '5d' });
+        const token = jwt.sign({ _id: user._id }, secret_key, { expiresIn: '5d' });
+
         console.log(token);
         res.cookie('token', token, {
             httpOnly: true,
@@ -48,7 +49,7 @@ router.post('/signup', async (req, res) => {
         const user = new User(req.body);
         await user.save();
 
-        const token = jwt.sign(user.toObject(), secret_key, { expiresIn: '5d' });
+        const token = jwt.sign({ user_id: user._id }, secret_key, { expiresIn: '5d' });
 
         res.cookie('token', token, {
             httpOnly: true,
@@ -84,5 +85,11 @@ router.patch('/users/:id', async (req, res) => {
         res.status(400).send(e);
     }
 })
+
+
+router.get('/logout', (req, res) => {
+    res.cookie('token', '', { expires: new Date(0), httpOnly: true });
+    res.status(200).send('Logged out and token destroyed');
+});
 
 module.exports = router;
