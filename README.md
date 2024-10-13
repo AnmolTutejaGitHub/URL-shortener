@@ -60,6 +60,14 @@ The following ports are used by the various components of the URL Shortener appl
 - **MongoDB Database:**
   - **Default Port:** **27018** 
 
+.env file variables
+
+Server
+ -- .env
+ADMIN_MAIL=
+NODEMAIL_APP_PASSWORD=
+SECRET_KEY=
+MONGODB_URL=
 
 
 

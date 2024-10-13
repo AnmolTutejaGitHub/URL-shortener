@@ -18,7 +18,7 @@ function Home() {
                 const response = await axios.get('http://localhost:6969/users', { withCredentials: true });
                 if (response.status === 200) {
                     setUser(response.data);
-                    navigate('/dashboard');
+                    navigate('/dashboard/shorten');
                 } else {
                     navigate('/login');
                 }

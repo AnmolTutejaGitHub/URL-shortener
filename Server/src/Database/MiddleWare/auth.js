@@ -1,6 +1,9 @@
+require('dotenv').config();
+
 const jwt = require('jsonwebtoken');
-const secret_key = 'tobechanged';
 const User = require('../Models/User');
+
+const secret_key = process.env.SECRET_KEY;
 
 const auth = async function (req, res, next) {
     const token = req.cookies.token;

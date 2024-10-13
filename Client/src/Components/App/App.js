@@ -4,6 +4,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import { useContext } from 'react';
 import UserContext from '../../Context/UserContext';
 import './App.css';
+import OTPValidation from '../OTPValidation/OTPValidation';
 
 function App() {
     const { user, setUser } = useContext(UserContext);
@@ -13,6 +14,7 @@ function App() {
                 <Routes>
                     <Route path="/*" element={<Home />} />
                     <Route path="/dashboard/*" element={<Dashboard />} />
+                    <Route path="/OTPValidation" element={<OTPValidation />} />
                 </Routes>
             </BrowserRouter>
         </div>

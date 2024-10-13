@@ -5,7 +5,7 @@ import ProfileCard from './ProfileCard';
 
 function Profile() {
 
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     if (!user) {
         return <div>Please log in to view your profile.</div>;
     }
@@ -16,8 +16,8 @@ function Profile() {
         <div className="profile">
             <div className="profile-div">
                 <div className='profile-edit'>
-                    <button>Edit Profile</button>
-                    <button>Change Password</button>
+                    {/* <button>Edit Profile</button>
+                    <button>Change Password</button> */}
                 </div>
                 <div className='profile-pic-div'>
                     <img src={profileImage} className='profile-name' alt="user-img"></img>

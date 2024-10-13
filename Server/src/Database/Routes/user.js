@@ -1,11 +1,13 @@
+require('dotenv').config();
 const express = require('express');
 const router = new express.Router();
 const User = require('../Models/User');
 const jwt = require('jsonwebtoken');
 const auth = require('../MiddleWare/auth');
 const bcrypt = require('bcrypt');
+const nodemailer = require('nodemailer');
 
-const secret_key = 'tobechanged';
+const secret_key = process.env.SECRET_KEY;
 
 router.get('/users', auth, async (req, res) => {
     try {
@@ -107,6 +109,40 @@ router.post('/delUserUrl', async (req, res) => {
         await user.save();
 
         res.status(200).send(user);
+    } catch (error) {
+        res.status(400).send(error);
+    }
+});
+
+
+router.post('/otp', async (req, res) => {
+    try {
+        const { email, otp } = req.body;
+
+        let transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
+            auth: {
+                user: process.env.ADMIN_MAIL,
+                pass: process.env.NODEMAIL_APP_PASSWORD,
+            },
+        });
+
+        let mailOptions = {
+            from: process.env.ADMIN_MAIL,
+            to: email,
+            subject: 'Your login OTP',
+            text: `Your OTP is: ${otp}`,
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return res.status(400).send(error);
+            }
+            res.status(200).send(otp);
+        });
+
     } catch (error) {
         res.status(400).send(error);
     }

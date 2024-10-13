@@ -22,11 +22,11 @@ function Login() {
             }, { withCredentials: true });
 
             setUser(User.data);
-            navigate('/dashboard/shorten');
+            // navigate('/dashboard/shorten');
+            navigate('/OTPValidation');
         } catch (err) {
-            setError(err.response.data.error);
+            setError(err?.response?.data?.error || 'Some error occured');
         }
-
     }
 
     return (
