@@ -34,9 +34,9 @@ router.post('/login', async (req, res) => {
         res.cookie('token', token, {
             httpOnly: true,
             maxAge: 5 * 24 * 60 * 60 * 1000,
-            domain: 'https://url-shortener-gamma-topaz.vercel.app',
+            domain: 'url-shortener-gamma-topaz.vercel.app',
             path: '/',
-            sameSite: 'Lax',
+            sameSite: 'None',
             secure: true,
         });
 
@@ -57,8 +57,9 @@ router.post('/signup', async (req, res) => {
         res.cookie('token', token, {
             httpOnly: true,
             maxAge: 5 * 24 * 60 * 60 * 1000,
+            domain: 'url-shortener-gamma-topaz.vercel.app',
             path: '/',
-            sameSite: 'Lax',
+            sameSite: 'None',
             secure: true,
         });
 
