@@ -62,12 +62,20 @@ The following ports are used by the various components of the URL Shortener appl
 
 .env file variables
 
-Server
- -- .env
-ADMIN_MAIL=
-NODEMAIL_APP_PASSWORD=
-SECRET_KEY=
-MONGODB_URL=
+Server  
+ -- .env  
+ADMIN_MAIL=  
+NODEMAIL_APP_PASSWORD=  
+SECRET_KEY=  
+MONGODB_URL=  
+FRONTEND_URL = "http://localhost:3000"  
+
+Client  
+-- .env  
+REACT_APP_API_URL=http://localhost:6969
+
+
+
 
 
 

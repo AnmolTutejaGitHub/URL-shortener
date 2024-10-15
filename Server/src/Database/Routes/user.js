@@ -35,8 +35,8 @@ router.post('/login', async (req, res) => {
             httpOnly: true,
             maxAge: 5 * 24 * 60 * 60 * 1000,
             path: '/',
-            sameSite: 'None',
-            secure: true,
+            sameSite: 'Lax',
+            secure: false
         });
 
         res.status(200).send(user);
@@ -57,8 +57,8 @@ router.post('/signup', async (req, res) => {
             httpOnly: true,
             maxAge: 5 * 24 * 60 * 60 * 1000,
             path: '/',
-            sameSite: 'None',
-            secure: true,
+            sameSite: 'Lax',
+            secure: false
         });
 
         res.status(200).send({ message: "Signup successful" });
