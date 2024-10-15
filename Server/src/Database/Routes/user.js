@@ -30,7 +30,7 @@ router.post('/login', async (req, res) => {
 
         const token = jwt.sign({ _id: user._id }, secret_key, { expiresIn: '5d' });
 
-        console.log(token);
+        //console.log(token);
         res.cookie('token', token, {
             httpOnly: true,
             maxAge: 5 * 24 * 60 * 60 * 1000,
