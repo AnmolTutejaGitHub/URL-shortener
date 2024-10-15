@@ -4,7 +4,7 @@ require('./Database/mongoose');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: `${process.env.FRONTEND_URL}`,
     credentials: true, // allowed cookies
 };
 
