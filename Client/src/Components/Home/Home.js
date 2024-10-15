@@ -15,7 +15,7 @@ function Home() {
     useEffect(() => {
         async function DoesTokenExist() {
             try {
-                const response = await axios.get('http://localhost:6969/users', { withCredentials: true });
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/users`, { withCredentials: true });
                 if (response.status === 200) {
                     setUser(response.data);
                     navigate('/dashboard/shorten');

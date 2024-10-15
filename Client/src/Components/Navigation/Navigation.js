@@ -7,7 +7,7 @@ function Navigation() {
     const navigate = useNavigate();
 
     async function logout() {
-        await axios.get('http://localhost:6969/logout', { withCredentials: true });
+        await axios.get(`${process.env.REACT_APP_API_URL}/logout`, { withCredentials: true });
         navigate('/');
     }
 

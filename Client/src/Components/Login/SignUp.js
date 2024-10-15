@@ -24,7 +24,7 @@ function SignUp() {
         }
 
         try {
-            const response = await axios.post('http://localhost:6969/signup', user, { withCredentials: true });
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/signup`, user, { withCredentials: true });
             if (response.status === 200) {
                 navigate('/login');
             }

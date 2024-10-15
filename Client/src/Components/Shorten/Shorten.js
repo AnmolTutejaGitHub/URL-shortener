@@ -22,7 +22,7 @@ function Shorten() {
             if (URLname.trim() === '') throw Error('Please Provide website name');
             if (url.trim() === '') throw Error('Please Provide website URL');
             // finding if already shortened one
-            const res = await axios.post(`http://localhost:6969/url`, {
+            const res = await axios.post(`${process.env.REACT_APP_API_URL}/url`, {
                 originalurl: url
             });
             if (res.status === 200 && res.data.shortened != null) {
@@ -34,8 +34,8 @@ function Shorten() {
 
 
             const threelen = generateStr(3);
-            const shortened = `http://localhost:6969/r/${threelen}`;
-            await axios.post('http://localhost:6969/addurl', {
+            const shortened = `${process.env.REACT_APP_API_URL}/r/${threelen}`;
+            await axios.post(`${process.env.REACT_APP_API_URL}/addurl`, {
                 shortened,
                 originalurl: url,
                 name: URLname,
@@ -54,7 +54,7 @@ function Shorten() {
 
     async function handleAddingToUserDB(shortened, url, Dummyid) {
 
-        const response = await axios.patch(`http://localhost:6969/users/${user._id}`, {
+        const response = await axios.patch(`${process.env.REACT_APP_API_URL}/users/${user._id}`, {
             shortened,
             originalurl: url,
             name: URLname,

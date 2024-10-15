@@ -9,7 +9,7 @@ function Stats() {
     const { user, setUser } = useContext(UserContext);
 
     async function handleDelete(originalurl) {
-        const response = await axios.post('http://localhost:6969/delUserUrl', {
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/delUserUrl`, {
             email: user.email,
             originalurl
         });

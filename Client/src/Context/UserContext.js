@@ -10,7 +10,7 @@ function Provider({ children }) {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await axios.get('http://localhost:6969/users', {
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/users`, {
                     withCredentials: true
                 });
 
