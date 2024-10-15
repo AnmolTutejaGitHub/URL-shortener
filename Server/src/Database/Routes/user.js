@@ -34,9 +34,10 @@ router.post('/login', async (req, res) => {
         res.cookie('token', token, {
             httpOnly: true,
             maxAge: 5 * 24 * 60 * 60 * 1000,
+            domain: 'https://url-shortener-gamma-topaz.vercel.app',
             path: '/',
             sameSite: 'Lax',
-            secure: false
+            secure: true,
         });
 
         res.status(200).send(user);
@@ -58,7 +59,7 @@ router.post('/signup', async (req, res) => {
             maxAge: 5 * 24 * 60 * 60 * 1000,
             path: '/',
             sameSite: 'Lax',
-            secure: false,
+            secure: true,
         });
 
         res.status(200).send({ message: "Signup successful" });
